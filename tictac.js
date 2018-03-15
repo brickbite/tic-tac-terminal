@@ -108,6 +108,14 @@ class Board {
   }
 
   aiMove() {
+    // TODO: AI logic:
+    // if (firstmove) {
+      // place at random spot
+    // } else {
+      // check player pieces and try to block
+      // try to win
+    // }
+
     let placed = false;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {

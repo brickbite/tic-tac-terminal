@@ -10,17 +10,18 @@ class Board {
   }
 
   addX(x, y) {
-    if (x === undefined || y === undefined) {
-      console.log('incorrect format');
+    // TODO: better input validation
+    if (x === '' || y === '') {
+      console.log('============\nInvalid: Missing Input\n============');
       return false;
-    } else if (x < 0 || x > 2) {
-      console.log('invalid x input');
+    } else if (isNaN(parseInt(x)) || isNaN(parseInt(y))) {
+      console.log('============\nInvalid: Not a Number\n============');
       return false;
-    } else if (y < 0 || y > 2) {
-      console.log('invalid y input');
+    } else if (x < 0 || x > 2 || y < 0 || y > 2) {
+      console.log('============\nInvalid: Out of Bounds\n============');
       return false;
-    } else if (x !== undefined && x !== undefined && this.board[x][y] !== '-') {
-      console.log('space taken');
+    } else if (this.board[x][y] !== '-') {
+      console.log('============\nInvalid: Space Taken\n============');
       return false;
     }
     console.log(`You place an X at row: ${x}, column: ${y}`)
@@ -29,17 +30,17 @@ class Board {
   }
 
   addO(x, y) {
-    if (x === undefined || y === undefined) {
-      console.log('incorrect format');
+    if (x === '' || y === '') {
+      console.log('============\nInvalid: Missing Input\n============');
       return false;
-    } else if (x < 0 || x > 2) {
-      console.log('invalid x input');
+    } else if (isNaN(parseInt(x)) || isNaN(parseInt(y))) {
+      console.log('============\nInvalid: Not a Number\n============');
       return false;
-    } else if (y < 0 || y > 2) {
-      console.log('invalid y input');
+    } else if (x < 0 || x > 2 || y < 0 || y > 2) {
+      console.log('============\nInvalid: Out of Bounds\n============');
       return false;
-    } else if (x !== undefined && x !== undefined && this.board[x][y] !== '-') {
-      console.log('space taken');
+    } else if (this.board[x][y] !== '-') {
+      console.log('============\nInvalid: Space Taken\n============');
       return false;
     }
     console.log(`The AI places an O at row: ${x}, column: ${y}`)
@@ -142,7 +143,7 @@ class Board {
 }
 
 
-let a = new Board();
+let gameInstance = new Board();
 
 // a.addX(0, 1);
 // a.print();
@@ -152,28 +153,28 @@ let a = new Board();
 //   a.print();
 // }
 
-var userName = readlineSync.question('May I have your name? ');
+// var userName = readlineSync.question('May I have your name? ');
 // console.log(typeof userName);
-console.log(`Hello, ${userName}!`);
+// console.log(`Hello, ${userName}!`);
 
 for (let i = 0; i < 9; i++) {
   let input = readlineSync.question('Your move! Enter Row and Column. (format: xy, 0 <= x, y <= 2)\n(example: 00 => top left square): ');
   let x = input.charAt(0);
   let y = input.charAt(1);
-  let valid = a.addX(x, y);
+  let valid = gameInstance.addX(x, y);
   
   if (valid) {
-    let completed = a.checkWin();
+    let completed = gameInstance.checkWin();
     if (completed) {
       break;
     }
-    a.print();
-    a.aiMove();
-    completed = a.checkWin();
+    gameInstance.print();
+    gameInstance.aiMove();
+    completed = gameInstance.checkWin();
     if (completed) {
       break;
     }
-    a.print();
+    gameInstance.print();
   } else {
     i--;
   }

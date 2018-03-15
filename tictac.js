@@ -9,7 +9,7 @@ class Board {
     ];
   }
 
-  addX(x, y) {
+  addPiece(x, y, piece, user) {
     // TODO: better input validation
     if (x === '' || y === '') {
       console.log('============\nInvalid: Missing Input\n============');
@@ -24,27 +24,8 @@ class Board {
       console.log('============\nInvalid: Space Taken\n============');
       return false;
     }
-    console.log(`You place an X at row: ${x}, column: ${y}`)
-    this.board[x][y] = 'X';
-    return true;
-  }
-
-  addO(x, y) {
-    if (x === '' || y === '') {
-      console.log('============\nInvalid: Missing Input\n============');
-      return false;
-    } else if (isNaN(parseInt(x)) || isNaN(parseInt(y))) {
-      console.log('============\nInvalid: Not a Number\n============');
-      return false;
-    } else if (x < 0 || x > 2 || y < 0 || y > 2) {
-      console.log('============\nInvalid: Out of Bounds\n============');
-      return false;
-    } else if (this.board[x][y] !== '-') {
-      console.log('============\nInvalid: Space Taken\n============');
-      return false;
-    }
-    console.log(`The AI places an O at row: ${x}, column: ${y}`)
-    this.board[x][y] = 'O';
+    console.log(`${user} puts an ${piece} at row: ${x}, column: ${y}`)
+    this.board[x][y] = piece;
     return true;
   }
 
@@ -121,7 +102,7 @@ class Board {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         if (this.board[i][j] === '-') {
-          this.addO(i, j);
+          this.addPiece(i, j, 'O', 'The AI');
           placed = true;
           return;
         }
@@ -145,23 +126,16 @@ class Board {
 
 let gameInstance = new Board();
 
-// a.addX(0, 1);
-// a.print();
-
-// for (let i = 0; i < 10; i++) {
-//   a.aiMove();
-//   a.print();
-// }
-
 // var userName = readlineSync.question('May I have your name? ');
 // console.log(typeof userName);
 // console.log(`Hello, ${userName}!`);
 
+// game loop
 for (let i = 0; i < 9; i++) {
   let input = readlineSync.question('Your move! Enter Row and Column. (format: xy, 0 <= x, y <= 2)\n(example: 00 => top left square): ');
   let x = input.charAt(0);
   let y = input.charAt(1);
-  let valid = gameInstance.addX(x, y);
+  let valid = gameInstance.addPiece(x, y, 'X', 'You');
   
   if (valid) {
     let completed = gameInstance.checkWin();
@@ -180,5 +154,6 @@ for (let i = 0; i < 9; i++) {
   }
 }
 
-a.print();
+// print final board after game
+gameInstance.print();
 

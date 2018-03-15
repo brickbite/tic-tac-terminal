@@ -59,6 +59,27 @@ class Board {
     return full;
   }
 
+  checkWinLose() {
+    // check columns
+    for (let i = 0; i < 2; i++) {
+
+    }
+    // check rows
+    for (let j = 0; j < 2; j++) {
+      if (this.board[][] === this.board[][] && this.board[][] === this.board[][]) {
+        
+      }
+    }
+    // check diagonal
+    for (let j = 0; j < 2; j++) {
+
+    }
+    // check diagonal
+    for (let j = 0; j < 2; j++) {
+
+    }
+  }
+
   aiMove() {
     let placed = false;
     for (let i = 0; i < 3; i++) {

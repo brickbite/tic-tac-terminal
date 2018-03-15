@@ -63,40 +63,48 @@ class Board {
     // check columns
     for (let j = 0; j < 2; j++) {
       if ('X' === this.board[0][j] && this.board[0][j] === this.board[1][j] && this.board[1][j] === this.board[2][j]) {
-        console.log('Player wins!');
+        console.log('============\nPlayer wins!\n============');
+        return true;
       }
       if ('O' === this.board[0][j] && this.board[0][j] === this.board[1][j] && this.board[1][j] === this.board[2][j]) {
-        console.log('AI wins!');
+        console.log('============\nAI wins!\n============');
+        return true;
       }
     }
     // check rows
     for (let j = 0; j < 2; j++) {
       if ('X' === this.board[j][0] && this.board[j][0] === this.board[j][1] && this.board[j][1] === this.board[j][2]) {
-        console.log('Player wins!');
+        console.log('============\nPlayer wins!\n============');
+        return true;
       }
       if ('O' === this.board[j][0] && this.board[j][0] === this.board[j][1] && this.board[j][1] === this.board[j][2]) {
-        console.log('AI wins!');
+        console.log('============\nAI wins!\n============');
+        return true;
       }
     }
     // check diagonal
     if ('X' === this.board[0][0] && this.board[0][0] === this.board[1][1] && this.board[1][1] === this.board[2][2]) {
-      console.log('Player wins!');
+      console.log('============\nPlayer wins!\n============');
+      return true;
     }
 
     if ('O' === this.board[0][0] && this.board[0][0] === this.board[1][1] && this.board[1][1] === this.board[2][2]) {
-      console.log('AI wins!');
+      console.log('============\nAI wins!\n============');
+      return true;
     }
 
     // check diagonal
     if ('X' === this.board[0][2] && this.board[0][2] === this.board[1][1] && this.board[1][1] === this.board[2][0]) {
-      console.log('Player wins!');
+      console.log('============\nPlayer wins!\n============');
+      return true;
     }
 
     if ('O' === this.board[0][2] && this.board[0][2] === this.board[1][1] && this.board[1][1] === this.board[2][0]) {
-      console.log('AI wins!');
+      console.log('============\nAI wins!\n============');
+      return true;
     }
 
-
+    return false;
   }
 
   aiMove() {
@@ -141,28 +149,26 @@ var userName = readlineSync.question('May I have your name? ');
 console.log(`Hello, ${userName}!`);
 
 for (let i = 0; i < 9; i++) {
-  // let userPlaced = false;
-  // while (!userPlaced) {
-    let input = readlineSync.question('Your move! Enter Row and Column. (format: xy, 0 <= x, y <= 2)\n(example: 00 => top left square): ');
-    let x = input.charAt(0);
-    let y = input.charAt(1);
-    let valid = a.addX(x, y);
-    
-    if (valid) {
-      a.checkWin();
-      a.print();
-      a.aiMove();
-      a.checkWin();
-      a.print();
-      // userPlaced = true;
-    } else {
-      i--;
-    }
-    
-  // }
+  let input = readlineSync.question('Your move! Enter Row and Column. (format: xy, 0 <= x, y <= 2)\n(example: 00 => top left square): ');
+  let x = input.charAt(0);
+  let y = input.charAt(1);
+  let valid = a.addX(x, y);
   
-  // a.aiMove();
-  // a.print();
+  if (valid) {
+    let completed = a.checkWin();
+    if (completed) {
+      break;
+    }
+    a.print();
+    a.aiMove();
+    completed = a.checkWin();
+    if (completed) {
+      break;
+    }
+    a.print();
+  } else {
+    i--;
+  }
 }
 
 a.print();

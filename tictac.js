@@ -61,7 +61,7 @@ class Board {
 
   checkWin() {
     // check columns
-    for (let j = 0; j < 2; j++) {
+    for (let j = 0; j < 3; j++) {
       if ('X' === this.board[0][j] && this.board[0][j] === this.board[1][j] && this.board[1][j] === this.board[2][j]) {
         console.log('============\nPlayer wins!\n============');
         return true;
@@ -72,7 +72,7 @@ class Board {
       }
     }
     // check rows
-    for (let j = 0; j < 2; j++) {
+    for (let j = 0; j < 3; j++) {
       if ('X' === this.board[j][0] && this.board[j][0] === this.board[j][1] && this.board[j][1] === this.board[j][2]) {
         console.log('============\nPlayer wins!\n============');
         return true;

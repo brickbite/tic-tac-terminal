@@ -2,7 +2,7 @@ var readlineSync = require('readline-sync');
 
 class Board {
   constructor() {
-    this.state = [
+    this.board = [
       ['-', '-', '-'],
       ['-', '-', '-'],
       ['-', '-', '-']
@@ -19,12 +19,12 @@ class Board {
     } else if (y < 0 || y > 2) {
       console.log('invalid y input');
       return false;
-    } else if (x !== undefined && x !== undefined && this.state[x][y] !== '-') {
+    } else if (x !== undefined && x !== undefined && this.board[x][y] !== '-') {
       console.log('space taken');
       return false;
     }
     console.log(`You place an X at row: ${x}, column: ${y}`)
-    this.state[x][y] = 'X';
+    this.board[x][y] = 'X';
     return true;
   }
 
@@ -38,12 +38,12 @@ class Board {
     } else if (y < 0 || y > 2) {
       console.log('invalid y input');
       return false;
-    } else if (x !== undefined && x !== undefined && this.state[x][y] !== '-') {
+    } else if (x !== undefined && x !== undefined && this.board[x][y] !== '-') {
       console.log('space taken');
       return false;
     }
     console.log(`The AI places an O at row: ${x}, column: ${y}`)
-    this.state[x][y] = 'O';
+    this.board[x][y] = 'O';
     return true;
   }
 
@@ -51,7 +51,7 @@ class Board {
     let full = true;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
-        if (this.state[i][j] === '-') {
+        if (this.board[i][j] === '-') {
           full = false;
         }
       }
@@ -71,10 +71,10 @@ class Board {
     }
     // check rows
     for (let j = 0; j < 2; j++) {
-      if ('X' === this.board[j][0] && this.board[j][0] === this.board[j][1] && this.board[j][1] === this.board[][2]) {
+      if ('X' === this.board[j][0] && this.board[j][0] === this.board[j][1] && this.board[j][1] === this.board[j][2]) {
         console.log('Player wins!');
       }
-      if ('O' === this.board[j][0] && this.board[j][0] === this.board[j][1] && this.board[j][1] === this.board[][2]) {
+      if ('O' === this.board[j][0] && this.board[j][0] === this.board[j][1] && this.board[j][1] === this.board[j][2]) {
         console.log('AI wins!');
       }
     }
@@ -103,7 +103,7 @@ class Board {
     let placed = false;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
-        if (this.state[i][j] === '-') {
+        if (this.board[i][j] === '-') {
           this.addO(i, j);
           placed = true;
           return;
@@ -118,7 +118,7 @@ class Board {
   print() {
     let output = ``;
     for (let i = 0; i < 3; i++) {
-      output = output + this.state[i][0] + '|' + this.state[i][1] + '|' + this.state[i][2] + '\n';
+      output = output + this.board[i][0] + '|' + this.board[i][1] + '|' + this.board[i][2] + '\n';
     }
     console.log(output);
   }
@@ -149,8 +149,10 @@ for (let i = 0; i < 9; i++) {
     let valid = a.addX(x, y);
     
     if (valid) {
+      a.checkWin();
       a.print();
       a.aiMove();
+      a.checkWin();
       a.print();
       // userPlaced = true;
     } else {

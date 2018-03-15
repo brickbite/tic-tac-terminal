@@ -59,25 +59,44 @@ class Board {
     return full;
   }
 
-  checkWinLose() {
+  checkWin() {
     // check columns
-    for (let i = 0; i < 2; i++) {
-
+    for (let j = 0; j < 2; j++) {
+      if ('X' === this.board[0][j] && this.board[0][j] === this.board[1][j] && this.board[1][j] === this.board[2][j]) {
+        console.log('Player wins!');
+      }
+      if ('O' === this.board[0][j] && this.board[0][j] === this.board[1][j] && this.board[1][j] === this.board[2][j]) {
+        console.log('AI wins!');
+      }
     }
     // check rows
     for (let j = 0; j < 2; j++) {
-      if (this.board[][] === this.board[][] && this.board[][] === this.board[][]) {
-        
+      if ('X' === this.board[j][0] && this.board[j][0] === this.board[j][1] && this.board[j][1] === this.board[][2]) {
+        console.log('Player wins!');
+      }
+      if ('O' === this.board[j][0] && this.board[j][0] === this.board[j][1] && this.board[j][1] === this.board[][2]) {
+        console.log('AI wins!');
       }
     }
     // check diagonal
-    for (let j = 0; j < 2; j++) {
-
+    if ('X' === this.board[0][0] && this.board[0][0] === this.board[1][1] && this.board[1][1] === this.board[2][2]) {
+      console.log('Player wins!');
     }
+
+    if ('O' === this.board[0][0] && this.board[0][0] === this.board[1][1] && this.board[1][1] === this.board[2][2]) {
+      console.log('AI wins!');
+    }
+
     // check diagonal
-    for (let j = 0; j < 2; j++) {
-
+    if ('X' === this.board[0][2] && this.board[0][2] === this.board[1][1] && this.board[1][1] === this.board[2][0]) {
+      console.log('Player wins!');
     }
+
+    if ('O' === this.board[0][2] && this.board[0][2] === this.board[1][1] && this.board[1][1] === this.board[2][0]) {
+      console.log('AI wins!');
+    }
+
+
   }
 
   aiMove() {

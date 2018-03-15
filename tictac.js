@@ -97,12 +97,13 @@ let a = new Board();
 // }
 
 var userName = readlineSync.question('May I have your name? ');
-console.log(typeof userName);
+// console.log(typeof userName);
+console.log(`Hello, ${userName}!`);
 
 for (let i = 0; i < 9; i++) {
   // let userPlaced = false;
   // while (!userPlaced) {
-    let input = readlineSync.question('Your move! Enter Row and Column: ');
+    let input = readlineSync.question('Your move! Enter Row and Column. (format: xy, 0 <= x, y <= 2)\n(example: 00 => top left square): ');
     let x = input.charAt(0);
     let y = input.charAt(1);
     let valid = a.addX(x, y);

@@ -13,40 +13,38 @@ class Board {
     if (x === undefined || y === undefined) {
       console.log('incorrect format');
       return false;
-    }
-    if (x < 0 || x > 2) {
+    } else if (x < 0 || x > 2) {
       console.log('invalid x input');
       return false;
-    }
-    if (y < 0 || y > 2) {
+    } else if (y < 0 || y > 2) {
       console.log('invalid y input');
       return false;
-    }
-    if (this.state[x][y] !== '-') {
+    } else if (x !== undefined && x !== undefined && this.state[x][y] !== '-') {
       console.log('space taken');
       return false;
     }
+    console.log(`You place an X at row: ${x}, column: ${y}`)
     this.state[x][y] = 'X';
+    return true;
   }
 
   addO(x, y) {
     if (x === undefined || y === undefined) {
       console.log('incorrect format');
       return false;
-    }
-    if (x < 0 || x > 2) {
+    } else if (x < 0 || x > 2) {
       console.log('invalid x input');
       return false;
-    }
-    if (y < 0 || y > 2) {
+    } else if (y < 0 || y > 2) {
       console.log('invalid y input');
       return false;
-    }
-    if (this.state[x][y] !== '-') {
+    } else if (x !== undefined && x !== undefined && this.state[x][y] !== '-') {
       console.log('space taken');
       return false;
     }
+    console.log(`The AI places an O at row: ${x}, column: ${y}`)
     this.state[x][y] = 'O';
+    return true;
   }
 
   checkFull() {
@@ -104,7 +102,7 @@ console.log(typeof userName);
 for (let i = 0; i < 9; i++) {
   // let userPlaced = false;
   // while (!userPlaced) {
-    let input = readlineSync.question('enter Row and Column');
+    let input = readlineSync.question('Your move! Enter Row and Column: ');
     let x = input.charAt(0);
     let y = input.charAt(1);
     let valid = a.addX(x, y);

@@ -8,4 +8,5 @@
 1. use ```node tictactoe.js``` to run the game.
 
 ## Dependencies:
+- nodeJS
 - readline-sync (npm package used to read user input)
